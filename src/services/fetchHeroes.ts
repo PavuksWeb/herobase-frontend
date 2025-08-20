@@ -1,4 +1,4 @@
-import type { Hero } from '../types/hero';
+import type { Hero } from '../types/hero.t';
 
 export default async function fetchHeroes(): Promise<Hero[]> {
   const res = await fetch('http://localhost:4000/heroes');

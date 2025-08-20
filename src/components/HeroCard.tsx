@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import type { Hero } from '../types/hero';
+import type { Hero } from '../types/hero.t';
 import { Link } from 'react-router';
 
 export default function HeroCard(hero: Hero) {

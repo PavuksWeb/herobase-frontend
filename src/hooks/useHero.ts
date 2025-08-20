@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import fetchHero from '../services/fetchHeroById';
-import type { Hero } from '../types/hero';
+import type { Hero } from '../types/hero.t';
 
 export function useHero(id: string | undefined) {
   return useQuery<Hero, Error>({

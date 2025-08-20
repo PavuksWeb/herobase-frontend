@@ -1,11 +1,14 @@
 import { useNavigate, useParams } from 'react-router';
 import { useHero } from '../hooks/useHero';
 import { CircularProgress } from '@mui/material';
+import { useState } from 'react';
 
 export default function HeroPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { data: hero, isLoading, error } = useHero(id);
+
+  const [curImageIndex, setCurImageIndex] = useState(0);
 
   if (isLoading)
     return (
@@ -17,6 +20,9 @@ export default function HeroPage() {
     return <p className="text-red-500 text-center mt-10">Loading is failed</p>;
   if (!hero) return <p className="text-center mt-10">Hero is not found</p>;
 
+  const images = hero.images || [];
+  const totalImages = images.length;
+
   return (
     <div className="max-w-6xl mx-auto p-6">
       <button
@@ -27,12 +33,35 @@ export default function HeroPage() {
       </button>
 
       <div className="flex gap-10 mt-6">
-        <img
-          src={hero.images?.[0]}
-          alt={hero.nickname}
-          className="w-[346px] h-[480] rounded-lg shadow-lg mb-6"
-        />
-        <div className="flex flex-col bg-neutral-800/90 p-6 text-white gap-3">
+        <div>
+          <img
+            src={images[curImageIndex]}
+            alt={hero.nickname}
+            className="w-[346px] h-[480px] rounded-lg shadow-lg mb-6"
+          />
+
+          {totalImages > 1 && (
+            <div className="flex flex-col items-center gap-2">
+              <div className="flex gap-2 mt-2">
+                {images.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`Thumbnail ${idx + 1}`}
+                    onClick={() => setCurImageIndex(idx)}
+                    className={`w-16 h-20 rounded cursor-pointer border-2 transition-transform ${
+                      idx === curImageIndex
+                        ? 'border-yellow-400 scale-105'
+                        : 'border-transparent hover:scale-105'
+                    } object-cover`}
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+
+        <div className="flex flex-col w-2xl bg-neutral-800/90 p-6 text-white gap-3">
           <h1 className="text-3xl font-bold text-center mb-2">
             {hero.nickname}
           </h1>

@@ -5,25 +5,19 @@ import HeroesList from './components/HeroesList';
 import Layout from './components/Layout';
 import HeroPage from './components/HeroPage';
 import { BrowserRouter } from 'react-router';
+import { PaginationProvider } from './context/PaginationProvider';
 
 export default function App() {
   return (
-    // <>
-    //   <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
-    //   <div className="relative bg-cover bg-center bg-[url(/heroes.webp)]">
-    //     <HeroSection>
-    //       <Header />
-    //       <HeroesList />
-    //     </HeroSection>
-    //   </div>
-    // </>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HeroesList />} />
-          <Route path="heroes/:id" element={<HeroPage />} />
-        </Route>
-      </Routes>
+      <PaginationProvider>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HeroesList />} />
+            <Route path="heroes/:id" element={<HeroPage />} />
+          </Route>
+        </Routes>
+      </PaginationProvider>
     </BrowserRouter>
   );
 }

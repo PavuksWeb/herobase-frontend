@@ -1,13 +1,12 @@
-// import getAllHeroes from '../services/getAllHeroes';
-
-import { useState } from 'react';
+// import { useState } from 'react';
 import { useHeroes } from '../hooks/useHeroes';
+import usePagination from '../hooks/usePagination';
 import HeroCard from './HeroCard';
 import { Pagination } from '@mui/material';
 
 export default function HeroesList() {
   const { data: heroes, isLoading, isError, error } = useHeroes();
-  const [page, setPage] = useState(1);
+  const { curPage, setCurPage } = usePagination();
   const itemsPerPage = 5;
 
   if (isLoading)
@@ -20,8 +19,8 @@ export default function HeroesList() {
 
   const pageCount = Math.ceil(heroes.length / itemsPerPage);
   const displayedHeroes = heroes.slice(
-    (page - 1) * itemsPerPage,
-    page * itemsPerPage
+    (curPage - 1) * itemsPerPage,
+    curPage * itemsPerPage
   );
 
   return (
@@ -36,8 +35,8 @@ export default function HeroesList() {
 
       <Pagination
         count={pageCount}
-        page={page}
-        onChange={(_, value) => setPage(value)}
+        page={curPage}
+        onChange={(_, value) => setCurPage(value)}
         className="mt-6"
         size="large"
         sx={{
