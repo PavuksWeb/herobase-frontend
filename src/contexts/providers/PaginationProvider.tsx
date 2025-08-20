@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { PaginationContext } from './PaginationContext';
+import { PaginationContext } from '../PaginationContext';
 
 interface ProviderProps {
   children: ReactNode;

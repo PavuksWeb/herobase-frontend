@@ -20,8 +20,8 @@ export default function Logo() {
        Z"
         fill="none"
         stroke="#D62828"
-        stroke-width="3"
-        stroke-linejoin="round"
+        strokeWidth="3"
+        strokeLinejoin="round"
       />
 
       <path d="M34 12 h12 v14 l-6 -4 -6 4 V12 Z" fill="#003f88" />
@@ -46,19 +46,19 @@ export default function Logo() {
        c2 -1 15 -9 20 -21"
         fill="none"
         stroke="#48cae4"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
 
       <text
         x="90"
         y="55"
-        font-size="36"
-        font-family="'Bangers', sans-serif"
+        fontSize="36"
+        fontFamily="'Bangers', sans-serif"
         fill="#ffffff"
         stroke="#D62828"
-        stroke-width="2"
-        paint-order="stroke"
+        strokeWidth="2"
+        paintOrder="stroke"
       >
         Herobase
       </text>

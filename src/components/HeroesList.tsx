@@ -1,18 +1,15 @@
-// import { useState } from 'react';
 import { useHeroes } from '../hooks/useHeroes';
 import usePagination from '../hooks/usePagination';
 import HeroCard from './HeroCard';
 import { Pagination } from '@mui/material';
+import Spinner from './Spinner';
 
 export default function HeroesList() {
   const { data: heroes, isLoading, isError, error } = useHeroes();
   const { curPage, setCurPage } = usePagination();
   const itemsPerPage = 5;
 
-  if (isLoading)
-    return (
-      <div className="w-10 h-10 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
-    );
+  if (isLoading) return <Spinner />;
   if (isError) return <p>{error.message}</p>;
   if (!heroes || heroes.length === 0)
     return <p className="text-white p-4">There no heroes</p>;

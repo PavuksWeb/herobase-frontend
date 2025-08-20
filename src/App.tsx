@@ -1,11 +1,9 @@
 import { Route, Routes } from 'react-router';
-// import Header from './components/Header';
+import { BrowserRouter } from 'react-router';
+import { PaginationProvider } from './contexts/providers/PaginationProvider';
 import HeroesList from './components/HeroesList';
-// import HeroSection from './components/HeroSection';
 import Layout from './components/Layout';
 import HeroPage from './components/HeroPage';
-import { BrowserRouter } from 'react-router';
-import { PaginationProvider } from './context/PaginationProvider';
 
 export default function App() {
   return (

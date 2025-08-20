@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router';
 import { useHero } from '../hooks/useHero';
-import { CircularProgress } from '@mui/material';
 import { useState } from 'react';
+import Spinner from './Spinner';
 
 export default function HeroPage() {
   const { id } = useParams<{ id: string }>();
@@ -10,12 +10,7 @@ export default function HeroPage() {
 
   const [curImageIndex, setCurImageIndex] = useState(0);
 
-  if (isLoading)
-    return (
-      <div className="flex justify-center mt-10">
-        <CircularProgress />
-      </div>
-    );
+  if (isLoading) return <Spinner />;
   if (error)
     return <p className="text-red-500 text-center mt-10">Loading is failed</p>;
   if (!hero) return <p className="text-center mt-10">Hero is not found</p>;
@@ -71,7 +66,7 @@ export default function HeroPage() {
           <p className="text-2xl mt-1">Superpowers</p>
           <ul className="grid grid-cols-2 gap-4 w-full">
             {hero.superpowers.map((p) => (
-              <li>{`-- ${p}`}</li>
+              <li key={hero.id}>{`-- ${p}`}</li>
             ))}
           </ul>
         </div>
