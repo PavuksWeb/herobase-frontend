@@ -1,10 +1,10 @@
 import { S3Client } from '@aws-sdk/client-s3';
 
 export const s3Client = new S3Client({
-  region: 'eu-north-1',
+  region: import.meta.env.VITE_AWS_REGION,
   credentials: {
-    accessKeyId: 'AKIAY27ONBATYUV2DWB7',
-    secretAccessKey: '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',
+    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY,
+    secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
   },
   requestChecksumCalculation: 'WHEN_REQUIRED',
 });
