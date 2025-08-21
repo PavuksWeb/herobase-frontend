@@ -10,7 +10,7 @@ export default function HeroCard(hero: Hero) {
           <CardMedia
             sx={{ height: 400 }}
             title={hero.nickname}
-            image={hero.images[0]}
+            image={hero.images[0] || '/placeholder.png'}
           />
           <CardContent className="bg-neutral-800 text-white text-center">
             <Typography sx={{ fontSize: '1.5rem' }}>{hero.nickname}</Typography>

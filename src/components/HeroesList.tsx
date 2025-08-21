@@ -3,6 +3,7 @@ import usePagination from '../hooks/usePagination';
 import HeroCard from './HeroCard';
 import { Pagination } from '@mui/material';
 import Spinner from './Spinner';
+import { Link } from 'react-router';
 
 export default function HeroesList() {
   const { data: heroes, isLoading, isError, error } = useHeroes();
@@ -23,8 +24,8 @@ export default function HeroesList() {
   return (
     <div className="flex flex-col items-center p-10 gap-6 mt-16">
       <div className="flex gap-10">
-        {displayedHeroes.map((hero) => (
-          <div key={hero.id}>
+        {displayedHeroes.map((hero, index) => (
+          <div key={hero.id ?? index}>
             <HeroCard {...hero} />
           </div>
         ))}
@@ -50,6 +51,13 @@ export default function HeroesList() {
           },
         }}
       />
+
+      <Link
+        to={'/create'}
+        className="bg-neutral-800/90 text-2xl p-4 rounded-2xl cursor-pointer hover:bg-neutral-700 transition-colors duration-200"
+      >
+        Create new hero
+      </Link>
     </div>
   );
 }
