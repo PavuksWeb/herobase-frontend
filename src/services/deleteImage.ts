@@ -10,8 +10,8 @@ export async function deleteImageFromS3(key: string) {
     });
 
     await client.send(command);
-    console.log('File deleted');
   } catch (error) {
     console.log('Error deleting file', error);
   }
 }
+
