@@ -3,6 +3,7 @@ import useHeroMutations from '../hooks/useHeroMutations';
 import { uploadImageToS3 } from '../services/uploadImage';
 import type { CreateHero, Hero, UpdateHero } from '../types/hero.t';
 import { useNavigate } from 'react-router';
+import { deleteImageFromS3 } from '../services/deleteImage';
 
 interface HeroFormProps {
   hero?: Hero;
@@ -24,6 +25,7 @@ export default function HeroForm({ hero }: HeroFormProps) {
     hero?.images || []
   );
   const [newImages, setNewImages] = useState<File[]>([]);
+  const [removedImages, setRemovedImages] = useState<string[]>([]);
 
   const { createHero, updateHero, deleteHero } = useHeroMutations();
 
@@ -34,6 +36,8 @@ export default function HeroForm({ hero }: HeroFormProps) {
   };
 
   const removeExistingImage = (index: number) => {
+    const img = existingImages[index];
+    setRemovedImages((prev) => [...prev, img]);
     setExistingImages((prev) => prev.filter((_, i) => i !== index));
   };
 
@@ -48,6 +52,13 @@ export default function HeroForm({ hero }: HeroFormProps) {
     for (const file of newImages) {
       const url = await uploadImageToS3(file);
       uploadedUrls.push(url);
+    }
+
+    for (const img of removedImages) {
+      const fileName = img.split('/').pop();
+      if (fileName) {
+        await deleteImageFromS3(fileName);
+      }
     }
 
     if (hero) {
@@ -163,7 +174,9 @@ export default function HeroForm({ hero }: HeroFormProps) {
               {hero && (
                 <button
                   type="button"
-                  onClick={() => removeExistingImage(i)}
+                  onClick={() => {
+                    removeExistingImage(i);
+                  }}
                   className="absolute top-1 right-1 bg-red-600 text-white px-2 py-1 text-xs rounded"
                 >
                   ✕
@@ -221,3 +234,4 @@ export default function HeroForm({ hero }: HeroFormProps) {
     </form>
   );
 }
+
