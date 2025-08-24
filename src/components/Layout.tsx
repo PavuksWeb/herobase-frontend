@@ -5,7 +5,7 @@ export default function Layout() {
   return (
     <div className="min-h-screen relative">
       <div
-        className="fixed inset-0 bg-cover bg-center brightness-75"
+        className="fixed inset-0 bg-cover bg-fixed bg-center brightness-75"
         style={{ backgroundImage: "url('/heroes.webp')" }}
       />
 
@@ -18,4 +18,3 @@ export default function Layout() {
     </div>
   );
 }
-
